@@ -1,0 +1,69 @@
+:root {
+  /* Core Nocturnal Palette (Verified WCAG AA/AAA via contrast-check.py) */
+  --bg-midnight: #071426;
+  --bg-navy: #0c1e36;
+  --bg-navy-elevated: #122a4a;
+  --bg-scrim-strong: rgba(7, 20, 38, 0.88);
+  --bg-scrim-soft: rgba(12, 30, 54, 0.72);
+
+  /* Text Hierarchy */
+  --text-primary: #f5faff;     /* 17.59:1 on #071426 */
+  --text-secondary: #a8c0dc;   /* 9.88:1 on #071426 */
+  --text-muted: #8faac8;       /* 6.95:1 on #071426, 6.30:1 on #0C1E36 */
+  --text-on-bright: #071426;   /* 11.03:1 on #39D9FF */
+
+  /* Brand & Pyrotechnic Accents */
+  --accent-cyan: #39d9ff;      /* Primary interactive focal point (11.03:1 on #071426) */
+  --accent-cyan-hover: #6be4ff;
+  --accent-blue: #087cff;      /* Trajectory lines, large display accents, particles */
+  --accent-blue-ink: #0562d0;  /* Accessible filled blue surface with #F5FAFF text (5.46:1) */
+  --accent-magenta: #ec42d7;   /* Contextual Gender Reveal & firework burst accent (5.56:1) */
+  --accent-red: #ff405b;       /* Occasional firework burst accent & validation error (5.52:1) */
+
+  /* Borders & Hairlines (Non-text contrast tested) */
+  --border-subtle: rgba(168, 192, 220, 0.18);
+  --border-structural: rgba(168, 192, 220, 0.32);
+  --border-interactive: rgba(57, 217, 255, 0.55);
+
+  /* Typography System (Restrained two-family system with native Romanian comma-below diacritics) */
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Fluid Type Scale calibrated in Stage C so Hero headline & CTA fit above the fold */
+  --text-xs: clamp(0.76rem, 0.12vw + 0.73rem, 0.84rem);
+  --text-sm: clamp(0.875rem, 0.18vw + 0.83rem, 0.95rem);
+  --text-base: clamp(0.98rem, 0.25vw + 0.92rem, 1.08rem);
+  --text-lg: clamp(1.125rem, 0.45vw + 1rem, 1.3rem);
+  --text-xl: clamp(1.3rem, 1vw + 1rem, 1.75rem);
+  --text-2xl: clamp(1.75rem, 2.3vw + 1rem, 2.85rem);
+  --text-hero: clamp(2.05rem, 3.1vw + 0.9rem, 3.55rem);
+
+  /* Structural Spacing Scale (4/8/12/16/24/32/48/64/96/128) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Layout Containers */
+  --container-max: 1320px;
+  --container-pad: clamp(1.25rem, 4vw, 3.5rem);
+  --header-height: 4.5rem;
+
+  /* Deliberate Radius Scale (No universal pill shape) */
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Elevation & Motion */
+  --shadow-elevated: 0 24px 48px -12px rgba(3, 9, 18, 0.78);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 160ms;
+  --duration-base: 300ms;
+}

@@ -1,0 +1,575 @@
+---
+import { siteConfig } from '../data/siteConfig';
+
+const categories = [
+  { id: 'all', label: 'Toate momentele' },
+  { id: 'artificii-exterior', label: 'Spectacole exterior' },
+  { id: 'gender-reveal', label: 'Gender Reveal' },
+  { id: 'scantei-reci', label: 'Scântei reci' },
+];
+---
+
+<section class="gallery-section" id="galerie" aria-labelledby="gallery-heading">
+  <div class="container">
+    <header class="gallery-header">
+      <div class="gallery-title-group">
+        <span class="trajectory-marker">02 / Portofoliu foto și video</span>
+        <h2 id="gallery-heading" class="section-title">
+          Cadre din timpul evenimentelor.
+        </h2>
+        <p class="gallery-subtitle">
+          Selecție editorială organizată pe tipuri de efecte și formate reale de eveniment
+          (cadre largi de cer și filmări verticale surprinse la fața locului).
+        </p>
+      </div>
+
+      <div class="gallery-filter-bar" role="group" aria-label="Filtrează portofoliul după tipul de serviciu">
+        {
+          categories.map((cat, idx) => (
+            <button
+              type="button"
+              class={`filter-btn ${idx === 0 ? 'is-active' : ''}`}
+              data-filter={cat.id}
+              aria-pressed={idx === 0 ? 'true' : 'false'}
+            >
+              {cat.label}
+            </button>
+          ))
+        }
+      </div>
+    </header>
+
+    <div class="gallery-authenticity-banner" role="status">
+      <span class="placeholder-badge">
+        [MOD DEZVOLTARE: CADRE DEMONSTRATIVE]
+      </span>
+      <p>
+        Aceste 5 cadre păstrează proporțiile editoriale (`16:9`, `9:16` WhatsApp video și `4:5`)
+        și vor fi înlocuite cu fotografiile și clipurile video reale ale companiei imediat ce arhiva
+        WhatsApp este copiată în proiect.
+      </p>
+    </div>
+
+    <!-- Editorial Asymmetric Gallery Grid -->
+    <div class="editorial-gallery-grid" id="gallery-grid">
+      {
+        siteConfig.galleryItems.map((item, index) => (
+          <figure
+            class={`gallery-item aspect-${item.aspect} item-slot-${index + 1}`}
+            data-category={item.category}
+          >
+            <button
+              type="button"
+              class="gallery-card-trigger"
+              data-lightbox-open={item.id}
+              aria-label={`Deschide cadrul mărit: ${item.title}`}
+            >
+              <div class="gallery-media-wrap">
+                <svg
+                  viewBox="0 0 600 450"
+                  class="gallery-placeholder-svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <radialGradient id={`galGrad-${item.id}`} cx="50%" cy="42%" r="55%">
+                      <stop offset="0%" stop-color={item.palette[2]} stop-opacity="0.55" />
+                      <stop offset="50%" stop-color={item.palette[1]} stop-opacity="0.24" />
+                      <stop offset="100%" stop-color={item.palette[0]} stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <rect width="600" height="450" fill={item.palette[0]} />
+                  <rect width="600" height="450" fill={`url(#galGrad-${item.id})`} />
+                  <line x1="300" y1="410" x2="300" y2="175" stroke={item.palette[1]} stroke-width="2" />
+                  <circle cx="300" cy="175" r="78" fill="none" stroke={item.palette[2]} stroke-width="1.8" stroke-dasharray="3 8" />
+                  <circle cx="300" cy="175" r="42" fill="none" stroke={item.palette[1]} stroke-width="1.5" stroke-dasharray="2 5" />
+                  <circle cx="300" cy="175" r="5" fill="#F5FAFF" />
+                </svg>
+
+                <div class="gallery-badges-top">
+                  <span class="media-type-tag">
+                    {item.mediaType === 'video' ? 'VIDEO 9:16 / 16:9' : 'FOTOGRAFIE'}
+                  </span>
+                  <span class="placeholder-badge">[MEDIA CLIENT]</span>
+                </div>
+              </div>
+
+              <figcaption class="gallery-caption">
+                <span class="gallery-cat-label">{item.categoryLabel}</span>
+                <strong class="gallery-item-title">{item.title}</strong>
+                <span class="gallery-item-desc">{item.caption}</span>
+              </figcaption>
+            </button>
+          </figure>
+        ))
+      }
+    </div>
+
+    <!-- Explicit Empty State when a filter has no matching items (R-27) -->
+    <div class="gallery-empty-state" id="gallery-empty-state" hidden>
+      <p class="empty-title">Nu există cadre în această categorie momentan.</p>
+      <p class="empty-desc">
+        Resetează filtrul pentru a vedea toate cadrele disponibile din portofoliu.
+      </p>
+      <button type="button" class="btn-secondary-link" id="gallery-reset-filter">
+        Afișează toate momentele
+      </button>
+    </div>
+  </div>
+
+  <!-- Accessible Native Dialog Lightbox (Closable via Escape or button, R-26, R-32) -->
+  <dialog class="gallery-lightbox" id="gallery-lightbox" aria-labelledby="lightbox-title">
+    <div class="lightbox-inner">
+      <div class="lightbox-top-bar">
+        <span class="trajectory-marker" id="lightbox-category">Portofoliu</span>
+        <button
+          type="button"
+          class="lightbox-close-btn"
+          id="lightbox-close-btn"
+          aria-label="Închide fereastra de previzualizare"
+        >
+          Închide (Esc)
+        </button>
+      </div>
+
+      <div class="lightbox-stage" id="lightbox-stage">
+        <div class="lightbox-preview-canvas" id="lightbox-preview-box">
+          <span class="placeholder-badge">
+            [CADRU DEMONSTRATIV: VA AFIȘA FOTOGRAFIA SAU VIDEOCLIPUL ORIGINAL AL CLIENTULUI]
+          </span>
+        </div>
+      </div>
+
+      <div class="lightbox-footer">
+        <div>
+          <h3 id="lightbox-title" class="lightbox-heading">Titlu cadru</h3>
+          <p id="lightbox-caption" class="lightbox-desc"></p>
+        </div>
+        <a href="#contact" class="btn-primary" id="lightbox-inquire-link">
+          Solicită un efect similar
+        </a>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  import { siteConfig } from '../data/siteConfig';
+
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item');
+  const emptyState = document.getElementById('gallery-empty-state');
+  const resetFilterBtn = document.getElementById('gallery-reset-filter');
+
+  function applyFilter(category: string) {
+    let visibleCount = 0;
+
+    filterButtons.forEach((btn) => {
+      const isMatch = btn.dataset.filter === category;
+      btn.classList.toggle('is-active', isMatch);
+      btn.setAttribute('aria-pressed', String(isMatch));
+    });
+
+    galleryItems.forEach((item) => {
+      const itemCat = item.dataset.category;
+      const shouldShow = category === 'all' || itemCat === category;
+      if (shouldShow) {
+        item.removeAttribute('hidden');
+        visibleCount++;
+      } else {
+        item.setAttribute('hidden', '');
+      }
+    });
+
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.removeAttribute('hidden');
+      } else {
+        emptyState.setAttribute('hidden', '');
+      }
+    }
+  }
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      applyFilter(btn.dataset.filter || 'all');
+    });
+  });
+
+  if (resetFilterBtn) {
+    resetFilterBtn.addEventListener('click', () => applyFilter('all'));
+  }
+
+  // Lightbox Dialog Logic
+  const dialog = document.getElementById('gallery-lightbox') as HTMLDialogElement | null;
+  const closeBtn = document.getElementById('lightbox-close-btn');
+  const titleEl = document.getElementById('lightbox-title');
+  const captionEl = document.getElementById('lightbox-caption');
+  const categoryEl = document.getElementById('lightbox-category');
+  const previewBox = document.getElementById('lightbox-preview-box');
+  const inquireLink = document.getElementById('lightbox-inquire-link');
+
+  let lastTrigger: HTMLElement | null = null;
+
+  document.querySelectorAll<HTMLButtonElement>('[data-lightbox-open]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const id = trigger.dataset.lightboxOpen;
+      const item = siteConfig.galleryItems.find((entry) => entry.id === id);
+      if (!item || !dialog) return;
+
+      lastTrigger = trigger;
+      if (titleEl) titleEl.textContent = item.title;
+      if (captionEl) captionEl.textContent = item.caption;
+      if (categoryEl) categoryEl.textContent = item.categoryLabel;
+      if (previewBox) {
+        previewBox.style.background = `radial-gradient(circle at 50% 42%, ${item.palette[2]}44 0%, ${item.palette[1]}22 50%, ${item.palette[0]} 100%)`;
+      }
+
+      dialog.showModal();
+      closeBtn?.focus();
+    });
+  });
+
+  const closeLightbox = () => {
+    if (dialog && dialog.open) {
+      dialog.close();
+      lastTrigger?.focus();
+    }
+  };
+
+  closeBtn?.addEventListener('click', closeLightbox);
+  inquireLink?.addEventListener('click', () => {
+    if (dialog && dialog.open) dialog.close();
+  });
+
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      closeLightbox();
+    }
+  });
+</script>
+
+<style>
+  .gallery-section {
+    padding-block: var(--space-24);
+    background-color: var(--bg-navy);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .gallery-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .gallery-subtitle {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    max-width: 58ch;
+    margin-top: var(--space-3);
+  }
+
+  .gallery-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .filter-btn {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-midnight);
+    border: 1px solid var(--border-structural);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-out-expo),
+      color var(--duration-fast) var(--ease-out-expo),
+      border-color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-cyan);
+  }
+
+  .filter-btn.is-active {
+    background-color: var(--accent-cyan);
+    color: var(--text-on-bright);
+    border-color: var(--accent-cyan);
+    font-weight: 700;
+  }
+
+  .gallery-authenticity-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background-color: rgba(7, 20, 38, 0.72);
+    border: 1px dashed var(--border-interactive);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-8);
+  }
+
+  .gallery-authenticity-banner p {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    max-width: 85ch;
+  }
+
+  /* Editorial Asymmetric Grid: varied aspect ratios and spans with aligned row edges */
+  .editorial-gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .gallery-item {
+    display: flex;
+    height: 100%;
+    min-width: 0;
+  }
+
+  .gallery-item[hidden] {
+    display: none !important;
+  }
+
+  .gallery-card-trigger {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background-color: var(--bg-midnight);
+    border: 1px solid var(--border-structural);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      border-color var(--duration-fast) var(--ease-out-expo),
+      transform var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .gallery-card-trigger:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+  }
+
+  .gallery-media-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-midnight);
+  }
+
+  .aspect-landscape .gallery-media-wrap,
+  .aspect-vertical .gallery-media-wrap,
+  .aspect-portrait .gallery-media-wrap {
+    aspect-ratio: 16 / 10;
+  }
+
+  .gallery-placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-badges-top {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    right: var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .media-type-tag {
+    padding: 0.2rem 0.55rem;
+    background-color: rgba(12, 30, 54, 0.9);
+    border: 1px solid var(--border-structural);
+    border-radius: var(--radius-xs);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+  }
+
+  .gallery-caption {
+    padding: var(--space-4) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .gallery-cat-label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-cyan);
+  }
+
+  .gallery-item-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .gallery-item-desc {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  .gallery-empty-state {
+    padding: var(--space-12);
+    text-align: center;
+    background-color: var(--bg-midnight);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+
+  .empty-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .empty-desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  /* Lightbox Dialog */
+  .gallery-lightbox {
+    margin: auto;
+    width: min(92vw, 920px);
+    background-color: var(--bg-midnight);
+    color: var(--text-primary);
+    border: 1px solid var(--border-interactive);
+    border-radius: var(--radius-md);
+    padding: 0;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .gallery-lightbox::backdrop {
+    background-color: rgba(4, 10, 20, 0.86);
+  }
+
+  .lightbox-inner {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .lightbox-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .lightbox-close-btn {
+    min-height: 44px;
+    padding: 0.45rem 1rem;
+    background-color: var(--bg-navy);
+    border: 1px solid var(--border-structural);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .lightbox-close-btn:hover {
+    border-color: var(--accent-cyan);
+  }
+
+  .lightbox-preview-canvas {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    text-align: center;
+  }
+
+  .lightbox-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .lightbox-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-1);
+  }
+
+  .lightbox-desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    max-width: 56ch;
+  }
+
+  @media (min-width: 768px) {
+    .editorial-gallery-grid {
+      grid-template-columns: repeat(12, 1fr);
+      align-items: stretch;
+    }
+
+    .gallery-media-wrap {
+      flex: 1;
+      aspect-ratio: auto !important;
+      min-height: 270px;
+    }
+
+    .item-slot-1 {
+      grid-column: span 7;
+    }
+
+    .item-slot-2 {
+      grid-column: span 5;
+    }
+
+    .item-slot-3 {
+      grid-column: span 4;
+    }
+
+    .item-slot-4 {
+      grid-column: span 4;
+    }
+
+    .item-slot-5 {
+      grid-column: span 4;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+</style>

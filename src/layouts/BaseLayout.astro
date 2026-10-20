@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${siteConfig.brandName} | Spectacole de artificii, Gender Reveal și efecte speciale`,
+  description = 'Spectacole pirotehnice de exterior, efecte cromatice pentru Gender Reveal și fântâni de scântei reci pentru nunți, botezuri și evenimente private în România.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#071426" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / Social Sharing in Romanian -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:site_name" content={siteConfig.brandName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Google Fonts: Bricolage Grotesque (Display) + Plus Jakarta Sans (Body) with full Romanian latin-ext support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap&subset=latin,latin-ext"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#continut-principal" class="skip-link">
+      Sari direct la conținutul principal
+    </a>
+    <slot />
+  </body>
+</html>

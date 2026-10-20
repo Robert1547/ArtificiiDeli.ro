@@ -1,0 +1,125 @@
+---
+import { siteConfig } from '../data/siteConfig';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand-row">
+      <div class="footer-identity">
+        <a href="#top" class="footer-brand-name">
+          {siteConfig.brandName}<span class="footer-domain">.ro</span>
+        </a>
+        <p class="footer-tagline">{siteConfig.tagline}</p>
+        <p class="footer-legal">{siteConfig.contact.legalName}</p>
+      </div>
+
+      <nav aria-label="Linkuri subsol" class="footer-nav">
+        <ul class="footer-links">
+          {
+            siteConfig.navItems.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="#top">Înapoi sus ↑</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>© {currentYear} {siteConfig.brandName}. Toate drepturile rezervate.</p>
+      <p class="footer-status-note">{siteConfig.statusNote}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-12);
+    background-color: var(--bg-midnight);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .footer-brand-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .footer-identity {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .footer-domain {
+    color: var(--accent-cyan);
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .footer-legal {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-6);
+  }
+
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-cyan);
+  }
+
+  .footer-bottom-bar {
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .footer-status-note {
+    color: var(--accent-cyan);
+  }
+</style>

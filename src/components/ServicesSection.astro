@@ -1,0 +1,526 @@
+---
+import { siteConfig } from '../data/siteConfig';
+
+const [outdoorService, genderRevealService, indoorService] = siteConfig.services;
+---
+
+<section class="services-section" id="servicii" aria-labelledby="services-heading">
+  <div class="container">
+    <!-- Asymmetric Section Header -->
+    <header class="services-header">
+      <div class="services-header-left">
+        <span class="trajectory-marker">01 / Servicii pentru evenimente</span>
+        <h2 id="services-heading" class="section-title">
+          Efecte calibrate pentru scara, locul și momentul petrecerii.
+        </h2>
+      </div>
+      <div class="services-header-right">
+        <p class="section-intro">
+          Nu folosim pachete trase la indigo. Un spectacol pe malul unui lac cere altă deschidere
+          decât un Gender Reveal în grădină sau dansul mirilor într-un salon.
+        </p>
+        <span class="placeholder-badge">
+          [LISTA EXACTĂ DE SERVICII SE CONFIRMĂ CU CLIENTUL]
+        </span>
+      </div>
+    </header>
+
+    <!-- Service 01: Flagship Full-Width Architectural Split (Outdoor Fireworks) -->
+    <article class="service-flagship" aria-labelledby={`service-title-${outdoorService.id}`}>
+      <div class="flagship-content">
+        <div class="service-meta-row">
+          <span class="service-index">{outdoorService.index}</span>
+          <span class="service-category">{outdoorService.categoryLabel}</span>
+        </div>
+
+        <h3 id={`service-title-${outdoorService.id}`} class="service-title-large">
+          {outdoorService.title}
+        </h3>
+
+        <p class="service-summary">{outdoorService.summary}</p>
+
+        <ul class="service-Checks">
+          {outdoorService.details.map((detail) => <li>{detail}</li>)}
+        </ul>
+
+        <div class="service-footer-bar">
+          <div class="service-env-tag">
+            <span class="env-label">Amplasare:</span>
+            <span>{outdoorService.environment}</span>
+          </div>
+          <a href="#contact" class="btn-secondary-link" data-service-select={outdoorService.title}>
+            Cere ofertă pentru spectacol exterior
+          </a>
+        </div>
+      </div>
+
+      <div class="flagship-visual" role="img" aria-label="Ilustrație tehnică a deschiderii artificiilor de exterior la înălțime">
+        <svg viewBox="0 0 560 420" class="service-art-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="srvBlueGlow" cx="50%" cy="38%" r="48%">
+              <stop offset="0%" stop-color="#39D9FF" stop-opacity="0.4" />
+              <stop offset="50%" stop-color="#087CFF" stop-opacity="0.18" />
+              <stop offset="100%" stop-color="#071426" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="560" height="420" fill="#071426" />
+          <rect width="560" height="420" fill="url(#srvBlueGlow)" />
+
+          <!-- Three synchronized launch angles (Fan / V-shape battery) -->
+          <line x1="280" y1="370" x2="165" y2="145" stroke="#087CFF" stroke-width="1.8" stroke-dasharray="4 4" opacity="0.75" />
+          <line x1="280" y1="370" x2="280" y2="115" stroke="#39D9FF" stroke-width="2.2" opacity="0.9" />
+          <line x1="280" y1="370" x2="395" y2="145" stroke="#087CFF" stroke-width="1.8" stroke-dasharray="4 4" opacity="0.75" />
+
+          <!-- Center Apex Burst -->
+          <g transform="translate(280, 115)">
+            <circle r="5" fill="#F5FAFF" />
+            <circle r="48" fill="none" stroke="#39D9FF" stroke-width="1.5" stroke-dasharray="2 7" />
+            <circle r="86" fill="none" stroke="#087CFF" stroke-width="1.5" stroke-dasharray="3 9" />
+            <g stroke="#F5FAFF" stroke-width="2" stroke-linecap="round">
+              <line x1="0" y1="-10" x2="0" y2="-76" />
+              <line x1="0" y1="10" x2="0" y2="76" />
+              <line x1="-10" y1="0" x2="-76" y2="0" />
+              <line x1="10" y1="0" x2="76" y2="0" />
+              <line x1="7" y1="-7" x2="54" y2="-54" />
+              <line x1="-7" y1="-7" x2="-54" y2="-54" />
+              <line x1="7" y1="7" x2="54" y2="54" />
+              <line x1="-7" y1="7" x2="-54" y2="54" />
+            </g>
+          </g>
+
+          <!-- Left Wing Burst -->
+          <g transform="translate(165, 145)">
+            <circle r="4" fill="#39D9FF" />
+            <circle r="52" fill="none" stroke="#39D9FF" stroke-width="1.3" stroke-dasharray="2 6" />
+            <g stroke="#087CFF" stroke-width="1.6" stroke-linecap="round">
+              <line x1="0" y1="-8" x2="0" y2="-48" />
+              <line x1="0" y1="8" x2="0" y2="48" />
+              <line x1="-8" y1="0" x2="-48" y2="0" />
+              <line x1="8" y1="0" x2="48" y2="0" />
+            </g>
+          </g>
+
+          <!-- Right Wing Burst -->
+          <g transform="translate(395, 145)">
+            <circle r="4" fill="#39D9FF" />
+            <circle r="52" fill="none" stroke="#39D9FF" stroke-width="1.3" stroke-dasharray="2 6" />
+            <g stroke="#087CFF" stroke-width="1.6" stroke-linecap="round">
+              <line x1="0" y1="-8" x2="0" y2="-48" />
+              <line x1="0" y1="8" x2="0" y2="48" />
+              <line x1="-8" y1="0" x2="-48" y2="0" />
+              <line x1="8" y1="0" x2="48" y2="0" />
+            </g>
+          </g>
+
+          <line x1="40" y1="370" x2="520" y2="370" stroke="#122A4A" stroke-width="2" />
+          <text x="52" y="396" fill="#7E9AB8" font-size="11" font-family="sans-serif" letter-spacing="1">
+            DESCHIDERE ÎN EVANTAI / BATERII SINCRONIZATE LA ÎNĂLȚIME
+          </text>
+        </svg>
+        <div class="visual-overlay-badge">
+          <span class="placeholder-badge">[ÎNLOCUIRE CU FOTO SPECTACOL EXTERIOR]</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 02: Asymmetric Chromatic Composition (Gender Reveal — Cyan & Vivid Magenta) -->
+    <article class="service-gender-reveal" aria-labelledby={`service-title-${genderRevealService.id}`}>
+      <div class="gender-visual" role="img" aria-label="Ilustrație pentru efecte Gender Reveal în nuanțe de roz magenta și albastru cyan">
+        <svg viewBox="0 0 520 400" class="service-art-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="grCyan" cx="32%" cy="45%" r="44%">
+              <stop offset="0%" stop-color="#39D9FF" stop-opacity="0.5" />
+              <stop offset="65%" stop-color="#087CFF" stop-opacity="0.15" />
+              <stop offset="100%" stop-color="#071426" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="grMagenta" cx="68%" cy="45%" r="44%">
+              <stop offset="0%" stop-color="#EC42D7" stop-opacity="0.52" />
+              <stop offset="65%" stop-color="#EC42D7" stop-opacity="0.14" />
+              <stop offset="100%" stop-color="#071426" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="520" height="400" fill="#071426" />
+          <rect width="520" height="400" fill="url(#grCyan)" />
+          <rect width="520" height="400" fill="url(#grMagenta)" />
+
+          <!-- Dual Smoke & Pyrotechnic Columns -->
+          <path d="M175 345 C160 265 140 185 168 105" stroke="#39D9FF" stroke-width="4" stroke-linecap="round" fill="none" />
+          <path d="M345 345 C360 265 380 185 352 105" stroke="#EC42D7" stroke-width="4" stroke-linecap="round" fill="none" />
+
+          <circle cx="168" cy="105" r="46" fill="none" stroke="#39D9FF" stroke-width="2" stroke-dasharray="4 6" />
+          <circle cx="352" cy="105" r="46" fill="none" stroke="#EC42D7" stroke-width="2" stroke-dasharray="4 6" />
+          <circle cx="168" cy="105" r="6" fill="#F5FAFF" />
+          <circle cx="352" cy="105" r="6" fill="#F5FAFF" />
+
+          <line x1="40" y1="345" x2="480" y2="345" stroke="#122A4A" stroke-width="2" />
+          <text x="52" y="374" fill="#A8C0DC" font-size="11" font-family="sans-serif" letter-spacing="1">
+            FUM DENS DE ZI SAU ARTIFICII DE NOAPTE (BOY / GIRL)
+          </text>
+        </svg>
+        <div class="visual-overlay-badge">
+          <span class="placeholder-badge">[ÎNLOCUIRE CU FOTO/VIDEO GENDER REVEAL]</span>
+        </div>
+      </div>
+
+      <div class="gender-content">
+        <div class="service-meta-row">
+          <span class="service-index service-index-magenta">{genderRevealService.index}</span>
+          <span class="service-category service-category-magenta">{genderRevealService.categoryLabel}</span>
+        </div>
+
+        <h3 id={`service-title-${genderRevealService.id}`} class="service-title-large">
+          {genderRevealService.title}
+        </h3>
+
+        <p class="service-summary">{genderRevealService.summary}</p>
+
+        <div class="gender-modes-grid">
+          <div class="gender-mode-box mode-cyan">
+            <span class="mode-title">Varianta de Zi (Fum &amp; Jerbe)</span>
+            <p>Coloane dense de fum albastru cyan sau roz intens, vizibile clar în plină lumină naturală.</p>
+          </div>
+          <div class="gender-mode-box mode-magenta">
+            <span class="mode-title">Varianta de Seară (Cer Luminat)</span>
+            <p>Salve pirotehnice nocturne în nuanța aleasă, declanșate simultan la finalul numărătorii inverse.</p>
+          </div>
+        </div>
+
+        <ul class="service-Checks">
+          {genderRevealService.details.map((detail) => <li>{detail}</li>)}
+        </ul>
+
+        <div class="service-footer-bar">
+          <div class="service-env-tag">
+            <span class="env-label">Amplasare:</span>
+            <span>{genderRevealService.environment}</span>
+          </div>
+          <a href="#contact" class="btn-secondary-link" data-service-select={genderRevealService.title}>
+            Configurează momentul Gender Reveal
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 03: Horizontal Architectural Specification Band (Indoor Cold Sparks) -->
+    <article class="service-band" aria-labelledby={`service-title-${indoorService.id}`}>
+      <div class="band-head">
+        <div class="service-meta-row">
+          <span class="service-index">{indoorService.index}</span>
+          <span class="service-category">{indoorService.categoryLabel}</span>
+        </div>
+        <h3 id={`service-title-${indoorService.id}`} class="service-title-medium">
+          {indoorService.title}
+        </h3>
+        <p class="service-summary">{indoorService.summary}</p>
+      </div>
+
+      <div class="band-specs">
+        <ul class="service-Checks">
+          {indoorService.details.map((detail) => <li>{detail}</li>)}
+        </ul>
+        <div class="service-footer-bar">
+          <div class="service-env-tag">
+            <span class="env-label">Amplasare:</span>
+            <span>{indoorService.environment}</span>
+          </div>
+          <a href="#contact" class="btn-secondary-link" data-service-select={indoorService.title}>
+            Solicită detalii pentru scântei reci
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding-block: var(--space-24);
+    background-color: var(--bg-midnight);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-top: var(--space-3);
+    max-width: 20ch;
+  }
+
+  .services-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: var(--space-4);
+  }
+
+  .section-intro {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    max-width: 52ch;
+  }
+
+  /* Service 01: Flagship Split */
+  .service-flagship {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: var(--space-6);
+    background-color: var(--bg-navy);
+    border: 1px solid var(--border-structural);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-12);
+  }
+
+  .flagship-content,
+  .gender-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .service-meta-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .service-index {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--text-on-bright);
+    background-color: var(--accent-cyan);
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-xs);
+  }
+
+  .service-index-magenta {
+    background-color: var(--accent-magenta);
+    color: var(--text-primary);
+  }
+
+  .service-category {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-cyan);
+  }
+
+  .service-category-magenta {
+    color: var(--accent-magenta);
+  }
+
+  .service-title-large {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text-primary);
+  }
+
+  .service-title-medium {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+
+  .service-summary {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .service-Checks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .service-Checks li {
+    position: relative;
+    padding-left: var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+  }
+
+  .service-Checks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent-cyan);
+  }
+
+  .service-footer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .service-env-tag {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  .env-label {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-right: var(--space-1);
+  }
+
+  .flagship-visual,
+  .gender-visual {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background-color: var(--bg-midnight);
+    min-height: 280px;
+  }
+
+  .service-art-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .visual-overlay-badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    right: var(--space-3);
+  }
+
+  /* Service 02: Gender Reveal Asymmetric Split */
+  .service-gender-reveal {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: var(--space-6);
+    background:
+      linear-gradient(135deg, rgba(57, 217, 255, 0.06) 0%, rgba(12, 30, 54, 0.95) 48%, rgba(236, 66, 215, 0.08) 100%);
+    border: 1px solid rgba(236, 66, 215, 0.35);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-12);
+  }
+
+  .gender-modes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .gender-mode-box {
+    padding: var(--space-4);
+    background-color: rgba(7, 20, 38, 0.78);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .mode-cyan {
+    border-top: 2px solid var(--accent-cyan);
+  }
+
+  .mode-magenta {
+    border-top: 2px solid var(--accent-magenta);
+  }
+
+  .mode-title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .gender-mode-box p {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Service 03: Horizontal Specification Band */
+  .service-band {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    background-color: rgba(12, 30, 54, 0.65);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+
+  .band-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .band-specs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .gender-modes-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .service-flagship,
+    .service-gender-reveal,
+    .service-band {
+      padding: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-header {
+      grid-template-columns: 7fr 5fr;
+      align-items: end;
+    }
+
+    .service-flagship {
+      grid-template-columns: 7fr 5fr;
+      align-items: stretch;
+    }
+
+    .service-gender-reveal {
+      grid-template-columns: 5fr 7fr;
+      align-items: stretch;
+    }
+
+    .service-band {
+      grid-template-columns: 5fr 7fr;
+      align-items: center;
+      gap: var(--space-12);
+    }
+  }
+</style>
