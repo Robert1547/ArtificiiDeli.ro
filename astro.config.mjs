@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://artificiideli.ro',
+  site: 'https://Robert1547.github.io',
+  base: '/ArtificiiDeli.ro',
   compressHTML: true,
   devToolbar: {
     enabled: false,
